@@ -16,3 +16,17 @@ API Abstract Structures:
     - Can be linked to a stack via Git
 
 
+API Module Structure:
+- Each api module consists of 3 parts:
+  - View: This represents anything that consumes the module.
+    These are implemented seperately from the core module to allow
+    for consumer-agnostic code
+  - Core: The core logic of the module. This section cannot interface
+    with the outside world, it merely exposes function endpoints. This
+    module is meant to be pure, with any external resources injected as
+    dependancies
+    - Consists of structs to represent entities, a servicer to manage
+      those entities, and interfaces for injectors to implement
+  - Dependancies: Represent external services that can be used by services.
+    This can be anything that a service needs to do that cant be handled
+    internally (database read/writes, external api calls)
