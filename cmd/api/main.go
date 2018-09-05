@@ -6,13 +6,11 @@ import (
 
 func main() {
 	// Load user service
-	firebaseRepo := &user.FirebaseRepository{}
-
-	userService, err := user.New(firebaseRepo)
+	userService, err := user.New()
 
 	if err != nil {
 		panic(err)
 	}
 
-	userService.Hello()
+	userService.RegisterUser("jacobbleser@gmail.com", "megaboy101", "#megaboy101")
 }
