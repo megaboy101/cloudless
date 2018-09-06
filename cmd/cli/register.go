@@ -1,9 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
-	"github.com/megaboy101/cloudless-cli/pkg/auth"
+	"github.com/spf13/viper"
+
+	"github.com/megaboy101/cloudless/pkg/user"
 	"github.com/spf13/cobra"
 )
 
@@ -18,11 +20,27 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if _, err := auth.Signup(args[0], args[1]); err != nil {
-			fmt.Println(err)
-		} else {
-			fmt.Println("Registration successful!")
+		// Initialize user service
+		us, err := user.New()
+
+		if err != nil {
+			log.Fatalf("Error initializing user service: %v", err)
 		}
+
+		// Register a new user externally
+		user, err := us.Register(args[0], args[1], args[2])
+
+		if err != nil {
+			log.Fatalf("Error creating user: %v", err)
+		}
+
+		// Save user credentials locally to a config file
+		viper.Set("User", user)
+	},
+	PostRun: func(cmd *cobra.Command, args []string) {
+		SaveConfig()
+
+		log.Println("New user created and saved locally!")
 	},
 }
 

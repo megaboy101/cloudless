@@ -17,7 +17,6 @@ package main
 import (
 	"fmt"
 
-	"github.com/megaboy101/cloudless-cli/pkg/auth"
 	"github.com/spf13/cobra"
 )
 
@@ -32,11 +31,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if _, err := auth.Signin(args[0], args[1]); err != nil {
-			fmt.Println(err)
-		} else {
-			fmt.Println("Login successful!")
-		}
+		fmt.Println("Login was called")
 	},
 }
 

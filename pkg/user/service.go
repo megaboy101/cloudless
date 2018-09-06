@@ -5,7 +5,7 @@ type Servicer interface {
 
 type Repository interface {
 	Connect() (Repository, error)
-	RegisterUser(email, username, password string) (*User, error)
+	Register(email, username, password string) (*User, error)
 }
 
 type Service struct {

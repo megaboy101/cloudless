@@ -1,7 +1,9 @@
 package main
 
 import (
-	"github.com/megaboy101/cloudless-api/pkg/user"
+	"log"
+
+	"github.com/megaboy101/cloudless/pkg/user"
 )
 
 func main() {
@@ -12,5 +14,9 @@ func main() {
 		panic(err)
 	}
 
-	userService.RegisterUser("jacobbleser@gmail.com", "megaboy101", "#megaboy101")
+	_, err = userService.Register("jacobbleser@gmail.com", "megaboy101", "#megaboy101")
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }

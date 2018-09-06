@@ -16,7 +16,7 @@ type FirebaseRepository struct {
 
 func (r *FirebaseRepository) Connect() (Repository, error) {
 	// Initialize the Firebase SDK
-	opt := option.WithCredentialsFile("env/cloudless-prototype-firebase-adminsdk-q4d0n-c1cd79b3a0.json")
+	opt := option.WithCredentialsFile("env/cloudless-prototype-firebase-adminsdk-q4d0n-b28f9a3eb7.json")
 	firebaseApp, err := firebase.NewApp(context.Background(), nil, opt)
 
 	if err != nil {
@@ -36,7 +36,7 @@ func (r *FirebaseRepository) Connect() (Repository, error) {
 	return r, nil
 }
 
-func (r *FirebaseRepository) RegisterUser(email, username, password string) (*User, error) {
+func (r *FirebaseRepository) Register(email, username, password string) (*User, error) {
 	params := (&auth.UserToCreate{}).
 		Email(email).
 		EmailVerified(false).
