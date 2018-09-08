@@ -88,16 +88,16 @@ Application Organizational Structure
   - Cloudless projects are equivalent to Slack workspaces or Asana teams
   - Cloudless stacks are equivalent to Slack channels or Asana pages
   - Cloudless apps are equivalent to Slack chats or Asana items
-- Absolute top-level structure is the project
+- Absolute top-level structure is the workspace
+  - User Kubernetes namespaces behind the scenes
   - First one is free (only one for most teams)
-  - Creating additional workpspaces is an enterprise feature
+  - Creating additional workspaces is an enterprise feature
     - Private workspace of projects seperate from personal projects
-- Common organizational structure is the project
-  - Each project has its own set of team members
-- Inside a project is a series of stacks
+- Common organizational structure is the stack
   - Uses Helm charts behind the scenes
+  - Each stack has its own set of team members
+- Inside a stack is a series of applications and configurations
   - Stacks can be user-created or installed (ex: Gitlab)
   - Each stack can have its own environment
     - Multiple versions of same stack
   - Stacks can have addons (ex: MySql storage space)
-- Inside a stack is a series of applications
