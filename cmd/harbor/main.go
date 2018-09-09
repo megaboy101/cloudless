@@ -5,29 +5,20 @@ import (
 	"github.com/megaboy101/cloudless/pkg/harbor"
 )
 
+var HarborService harbor.Servicer
+
 func main() {
 	r := gin.Default()
 
-	r.POST("/createNamespace", func(c *gin.Context) {
-		var namespaceCommand NamespaceCommand
+	hs, err := harbor.New()
+	if err != nil {
+		panic(err.Error())
+	}
 
-		err := c.BindJSON(&namespaceCommand)
-		if err != nil {
-			panic(err.Error())
-		}
+	HarborService = hs
 
-		hs, err := harbor.New()
-		if err != nil {
-			panic(err.Error())
-		}
-
-		err = hs.CreateNamespace(namespaceCommand.IDToken)
-		if err != nil {
-			panic(err.Error())
-		}
-
-		c.JSON(200, gin.H{"ok": true})
-	})
+	r.POST("/createNamespace", CreateNamespace)
+	r.GET("/bootstrap", Bootstrap)
 
 	r.Run(":8080")
 }
